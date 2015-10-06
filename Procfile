@@ -1,0 +1,1 @@
+web: gunicorn intelivix.wsgi --log-file -
