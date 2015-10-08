@@ -12,7 +12,8 @@ class PersonListView(ListView):
 	# fazer mixin para adicionar uma lista como os nomes já existentes para ao autocomplete
 	model = Person
 	context_object_name = 'person_list'
-	template_name = 'person_list'
+	template_name = 'core/person_list.html'
+	paginate_by = 500
 
 
 class PersonCreateView(FormMessageMixin, CreateView):
@@ -50,5 +51,7 @@ class PersonDeleteView(DeleteMessageMixin, DeleteView):
 class LogListView(ListView):
 	# fazer mixin para adicionar uma lista como os nomes já existentes para ao autocomplete
 	model = Log
+	queryset = Log.objects.all()[:200]
 	context_object_name = 'log_list'
 	template_name = 'log_list'
+	paginate_by = 50

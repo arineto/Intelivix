@@ -7,24 +7,29 @@
 {% endblock %}
 
 {% block content %}
-	<table class="table table-striped">
-		<thead>
-			<th>Código</th>
-			<th>Nome</th>
-			<th>Detalhes</th>
-			<th>Editar</th>
-			<th>Remover</th>
-		</thead>
-		<tbody>
-			{% for person in person_list %}
-				<tr>
-					<td>{{ person.code }}</td>
-					<td>{{ person.name }}</td>
-					<td><a href="{% url 'core:person_detail' person.id %}"><span class="glyphicon glyphicon-list-alt"></span></a></td>
-					<td><a href="{% url 'core:person_update' person.id %}"><span class="glyphicon glyphicon-edit"></span></a></td>
-					<td><a href="{% url 'core:person_delete' person.id %}"><span class="glyphicon glyphicon-remove"></span></a></td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<th>Código</th>
+				<th>Nome</th>
+				<th>Detalhes</th>
+				<th>Editar</th>
+				<th>Remover</th>
+			</thead>
+			<tbody>
+				{% for person in person_list %}
+					<tr>
+						<td>{{ person.code }}</td>
+						<td>{{ person.name }}</td>
+						<td><a href="{% url 'core:person_detail' person.id %}"><span class="glyphicon glyphicon-list-alt"></span></a></td>
+						<td><a href="{% url 'core:person_update' person.id %}"><span class="glyphicon glyphicon-edit"></span></a></td>
+						<td><a href="{% url 'core:person_delete' person.id %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	
+	{% include 'core/paginator.html' %}
+	
 {% endblock %}

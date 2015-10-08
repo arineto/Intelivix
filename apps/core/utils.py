@@ -1,6 +1,8 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 
-from .models import Log
+from .models import Person, Log
+
 
 class FormMessageMixin(object):
 
