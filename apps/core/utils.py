@@ -28,3 +28,12 @@ class DetailLogMixin(object):
 		context = super(DetailLogMixin, self).get_context_data(**kwargs)
 		Log.objects.create(person=str(context['person']), action_type=3)
 		return context
+
+
+class NameListMixin(object):
+
+	def get_context_data(self, **kwargs):
+		context = super(NameListMixin, self).get_context_data(**kwargs)
+		name_list = Person.objects.all().values_list('name')
+		context['name_list'] = name_list
+		return context

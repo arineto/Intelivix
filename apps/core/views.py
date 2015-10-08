@@ -2,13 +2,14 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render
 
 from .models import Person, Log
 from .forms import PersonForm
-from .utils import FormMessageMixin, DeleteMessageMixin, DetailLogMixin
+from .utils import FormMessageMixin, DeleteMessageMixin, DetailLogMixin, NameListMixin
 
 
-class PersonListView(ListView):
+class PersonListView(NameListMixin, ListView):
 	# fazer mixin para adicionar uma lista como os nomes já existentes para ao autocomplete
 	model = Person
 	context_object_name = 'person_list'
