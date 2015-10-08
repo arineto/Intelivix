@@ -26,7 +26,7 @@ ADMINS = (
 SECRET_KEY = '$$5dzka0k(jut25t66i+ao_23%+d$b6yyu0&sx-hm3wy(gyc%8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -44,7 +44,9 @@ DJANGO_APPS = [
     'django.contrib.staticfiles'
 ]
 
-OTHER_APPS = []
+OTHER_APPS = [
+    'storages'
+]
 
 PROJECT_APPS = [
     'apps.core'
@@ -122,3 +124,15 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+# Amazon Settings:
+if not DEBUG:
+    STATIC_URL = 'https://intelivix-teste.s3.amazonaws.com/'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    AWS_QUERYSTRING_AUTH = False
+    
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
