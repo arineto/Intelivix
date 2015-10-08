@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block script %}
+<script type="text/javascript">
+	$("#person_list").addClass("active");
+</script>
+{% endblock %}
+
+{% block content %}
+	<table class="table table-striped">
+		<thead>
+			<th>Código</th>
+			<th>Nome</th>
+			<th></th>
+			<th></th>
+		</thead>
+		<tbody>
+			{% for person in person_list %}
+				<tr>
+					<td>{{ person.code }}</td>
+					<td>{{ person.name }}</td>
+					<td><a href=""><span class="glyphicon glyphicon-edit"></span></a></td>
+					<td><a href=""><span class="glyphicon glyphicon-remove"></span></a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
