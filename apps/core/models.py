@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
+from django.contrib import messages
 
 
 class Person(models.Model):
@@ -14,7 +15,7 @@ class Person(models.Model):
 
 	def get_absolute_url(self):
 		return reverse(
-			'core:person_list', args=[]
+			'core:person_detail', args=[self.pk]
 		)
 
 	class Meta:
