@@ -3,6 +3,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Person, Log
+from .forms import PersonForm
+from .utils import MessageMixin, FormLogMixin
 
 
 class PersonListView(ListView):
@@ -10,6 +12,14 @@ class PersonListView(ListView):
 	model = Person
 	context_object_name = 'person_list'
 	template_name = 'person_list'
+
+
+class PersonCreateView(MessageMixin, FormLogMixin, CreateView):
+	
+	form_class = PersonForm
+	template_name = 'core/form.html'
+	message = 'Pessoa criada com sucesso!'
+	action_type = 0
 
 
 class LogListView(ListView):

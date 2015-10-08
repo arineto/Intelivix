@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Person(models.Model):
@@ -8,6 +9,11 @@ class Person(models.Model):
 
 	def __str__(self):
 		return "%s (%d)" % (self.name, self.code)
+
+	def get_absolute_url(self):
+		return reverse(
+			'core:person_list', args=[]
+		)
 
 	class Meta:
 		verbose_name = 'Pessoa'

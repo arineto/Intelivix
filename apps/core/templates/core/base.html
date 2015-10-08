@@ -30,12 +30,29 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li id="person_list"><a href="{% url 'core:person_list' %}">Pessoas</a></li>
+            <li id="person_list" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Pessoas <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'core:person_list' %}">Listagem</a></li>
+                <li><a href="{% url 'core:person_create' %}">Criar</a></li>
+              </ul>
+            </li>
             <li id="log_list"><a href="{% url 'core:log_list' %}">Log</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+    {% if messages %}
+      <div class="alert alert-success alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
