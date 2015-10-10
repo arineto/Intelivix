@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^update/(?P<pk>\d+)/$', views.PersonUpdateView.as_view(), name='person_update'),
     url(r'^delete/(?P<pk>\d+)/$', views.PersonDeleteView.as_view(), name='person_delete'),
 
-    # # Log urls
+    # Log urls
     url(r'^logs/$', views.LogListView.as_view(), name='log_list'),
 ]
