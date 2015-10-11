@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
-
+from __future__ import absolute_import
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -45,7 +45,8 @@ DJANGO_APPS = [
 ]
 
 OTHER_APPS = [
-    'storages'
+    'storages',
+    'djcelery'
 ]
 
 PROJECT_APPS = [
@@ -118,10 +119,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/core/static'),
 )
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
 
 # Amazon Settings:
 if not DEBUG:
@@ -131,6 +128,12 @@ if not DEBUG:
     THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     AWS_QUERYSTRING_AUTH = False
     
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    # AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    # AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

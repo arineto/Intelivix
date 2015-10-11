@@ -1,20 +1,26 @@
-import requests
+from __future__ import absolute_import
 
-from random import randint
+import requests
+import random
+
+from celery.decorators import task, periodic_task
+from celery.task.schedules import crontab
 
 from .models import Person
 
 
+@periodic_task(run_every=(crontab(hour="*", minute="*", day_of_week="*")))
 def generatePeople():
 
-	for i in range(0,1000):
-		generatePerson()
+	for i in range(0,10):
+		generatePerson.delay()
 
 
+@task()
 def generatePerson():
 
 	name = getName()
-	code = randint(0,999999999)
+	code = random.randint(0,999999999)
 	person = Person.objects.create(code=code, name=name)
 	
 	return person
