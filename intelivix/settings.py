@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
-
+from __future__ import absolute_import
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -45,7 +45,8 @@ DJANGO_APPS = [
 ]
 
 OTHER_APPS = [
-    'storages'
+    'storages',
+    'djcelery'
 ]
 
 PROJECT_APPS = [
@@ -117,6 +118,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/core/static'),
 )
+
+
+# Celery settings
+BROKER_POOL_LIMIT = 3
+BROKER_URL = 'amqp://geekzjvy:7j_IWoOk9ouW4seLWOYmWTywuPZ4-NFk@baboon.rmq.cloudamqp.com/geekzjvy'
+
 
 try:
     from .local_settings import *
