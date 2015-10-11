@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.db.models.signals import post_delete
 from django.contrib import messages
+from celery.decorators import task
 
 
 class Person(models.Model):
@@ -58,11 +59,16 @@ def register_save_log(sender, instance, created, **kwargs):
 		action_type = 0
 	else:
 		action_type = 1
-	Log.objects.create(person=str(instance), action_type=action_type)
+	create_log(instance, action_type)
 
 
 def register_delete_log(sender, instance, **kwargs):
-	Log.objects.create(person=str(instance), action_type=2)
+	create_log.delay(instance, 2)
+
+
+@task()
+def create_log(instance, action_type):
+	Log.objects.create(person=str(instance), action_type=action_type)
 
 
 post_save.connect(register_save_log, sender=Person, dispatch_uid="apps.core.models.register_save_log")
