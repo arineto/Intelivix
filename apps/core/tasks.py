@@ -36,3 +36,8 @@ def getName():
 	)
 
 	return name
+
+
+@task()
+def teste():
+	print('aee')
