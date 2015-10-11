@@ -120,6 +120,16 @@ STATICFILES_DIRS = (
 )
 
 
+# Celery settings
+BROKER_POOL_LIMIT = 3
+BROKER_URL = 'amqp://geekzjvy:7j_IWoOk9ouW4seLWOYmWTywuPZ4-NFk@baboon.rmq.cloudamqp.com/geekzjvy'
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
 # Amazon Settings:
 if not DEBUG:
     STATIC_URL = 'https://intelivix-teste.s3.amazonaws.com/'
@@ -128,12 +138,6 @@ if not DEBUG:
     THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     AWS_QUERYSTRING_AUTH = False
     
-    # AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    # AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
