@@ -46,7 +46,8 @@ DJANGO_APPS = [
 
 OTHER_APPS = [
     'storages',
-    'djcelery'
+    'djcelery',
+    'haystack'
 ]
 
 PROJECT_APPS = [
@@ -118,6 +119,21 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/core/static'),
 )
+
+# haystack search using elasticsearch
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
+# http://django-haystack.readthedocs.org/en/latest/signal_processors.html
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# increase the default number of results (from 20)
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 40
 
 
 try:

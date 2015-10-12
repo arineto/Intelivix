@@ -12,7 +12,7 @@ from .models import Person
 @periodic_task(run_every=(crontab(hour="*", minute="*", day_of_week="*")))
 def generatePeople():
 
-	for i in range(0,10):
+	for i in range(0,50):
 		generatePerson.delay()
 
 
@@ -36,8 +36,3 @@ def getName():
 	)
 
 	return name
-
-
-@task()
-def teste():
-	print('aee')

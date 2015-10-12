@@ -17,7 +17,7 @@ class PersonListView(NameListMixin, ListView):
 	model = Person
 	context_object_name = 'person_list'
 	template_name = 'core/person_list.html'
-	paginate_by = 500
+	paginate_by = 100
 
 
 class PersonCreateView(FormMessageMixin, CreateView):
