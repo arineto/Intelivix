@@ -9,10 +9,10 @@ from django.http import HttpResponse
 
 from .models import Person, Log
 from .forms import PersonForm
-from .utils import FormMessageMixin, DeleteMessageMixin, DetailLogMixin, NameListMixin
+from .utils import FormMessageMixin, DeleteMessageMixin, DetailLogMixin, NameListMixin, PersonSearchMixin, LogSearchMixin
 
 
-class PersonListView(NameListMixin, ListView):
+class PersonListView(NameListMixin, PersonSearchMixin, ListView):
 
 	model = Person
 	context_object_name = 'person_list'
@@ -52,10 +52,9 @@ class PersonDeleteView(DeleteMessageMixin, DeleteView):
 	message = 'Pessoa deletada com sucesso!'
 
 
-class LogListView(ListView):
+class LogListView(LogSearchMixin, ListView):
 
 	model = Log
-	queryset = Log.objects.all()[:200]
 	context_object_name = 'log_list'
-	template_name = 'log_list'
+	template_name = 'core/log_list.html'
 	paginate_by = 50

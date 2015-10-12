@@ -1,5 +1,8 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from django.db.models import Q
+
+from haystack.query import SearchQuerySet
 
 from .models import Person, Log
 
@@ -37,3 +40,33 @@ class NameListMixin(object):
 		name_list = Person.objects.all().values_list('name')
 		context['name_list'] = name_list
 		return context
+
+
+class PersonSearchMixin(object):
+
+	def get_queryset(self):
+		query = self.request.GET.get('query')
+		
+		if query is None or query == '':
+			queryset = Person.objects.all()
+		else:
+			queryset = Person.objects.filter(
+				Q(name__icontains=query) | Q(code__icontains=query)
+			)
+
+		return queryset
+
+
+class LogSearchMixin(object):
+
+	def get_queryset(self):
+		query = self.request.GET.get('query')
+		
+		if query is None or query == '':
+			queryset = Log.objects.all()
+		else:
+			queryset = Log.objects.filter(
+				Q(person__icontains=query)
+			)
+
+		return queryset[:200]

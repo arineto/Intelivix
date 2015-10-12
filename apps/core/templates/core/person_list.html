@@ -2,9 +2,6 @@
 
 {% block script %}
 {% load staticfiles %}
-<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-<!-- <script type="text/javascript" src="{% static 'js/autocomplete.js' %}"></script> -->
 <script type="text/javascript">
 	$("#name_search").select2();
 	$("#person_list").addClass("active");
@@ -13,14 +10,14 @@
 
 {% block content %}
 	<div class="row">
-		<form class="form-inline" action="" method="POST">
-			{% csrf_token %}
+		<form class="form-inline" action="" method="GET">
 		  	<div class="form-group">
-		    	<select class="js-example-basic-multiple" style="min-width:300px" id="name_search" multiple="multiple">
+		    	<input type="text" name="query" list="name_list" class="form-control" style="width:300px">
+		    	<datalist id="name_list">
 		    		{% for name in name_list %}
 		    			<option>{{ name.0 }}</option>
 		    		{% endfor %}
-		    	</select>
+		    	</datalist>
 		  	</div>
 		  	<button type="submit" class="btn btn-primary">Buscar</button>
 		</form>
@@ -40,9 +37,9 @@
 					<tr>
 						<td>{{ person.code }}</td>
 						<td>{{ person.name }}</td>
-						<td><a href="{% url 'core:person_detail' person.id %}"><span class="glyphicon glyphicon-list-alt"></span></a></td>
-						<td><a href="{% url 'core:person_update' person.id %}"><span class="glyphicon glyphicon-edit"></span></a></td>
-						<td><a href="{% url 'core:person_delete' person.id %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+						<td><a href="{% url 'core:person_detail' person.pk %}"><span class="glyphicon glyphicon-list-alt"></span></a></td>
+						<td><a href="{% url 'core:person_update' person.pk %}"><span class="glyphicon glyphicon-edit"></span></a></td>
+						<td><a href="{% url 'core:person_delete' person.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 				{% endfor %}
 			</tbody>

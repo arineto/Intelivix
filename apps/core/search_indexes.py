@@ -18,6 +18,7 @@ class LogIndex(indexes.SearchIndex, indexes.Indexable):
 	text = indexes.CharField(document=True, use_template=True)
 	person = indexes.CharField(model_attr='person')
 	action_type = indexes.CharField(model_attr='action_type')
+	date = indexes.DateTimeField(model_attr='date')
 
 	def get_model(self):
 		return Log

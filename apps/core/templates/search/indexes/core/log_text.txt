@@ -1,2 +1,3 @@
 {{ object.person }}
 {{ object.get_action_type_display }}
+{{ object.date }}
