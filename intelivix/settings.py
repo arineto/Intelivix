@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 from __future__ import absolute_import
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from urlparse import urlparse
+from urllib import parse
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -122,7 +122,7 @@ STATICFILES_DIRS = (
 )
 
 # haystack search using elasticsearch
-es = urlparse(os.environ.get('SEARCHBOX_URL') or 'http://127.0.0.1:9200/')
+es = parse.urlparse(os.environ.get('SEARCHBOX_URL') or 'http://127.0.0.1:9200/')
 port = es.port or 80
 
 HAYSTACK_CONNECTIONS = {
