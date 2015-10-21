@@ -1,0 +1,38 @@
+{% extends 'workload/base.html' %}
+
+{% block content %}
+<div class="row">
+    <h3>Usuário: {{ object.user|capfirst }}</h3>
+    <h4>Data: {{ object.day|date:'d/m/Y' }}</h4>
+
+    <p>Tempo total trabalhado: <b>{{ total_worked_time }}</b></p>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <form method="POST" action="{% url 'workload:action_create' %}">
+                {% csrf_token %}
+                <input type="hidden" name="status" id="status_id" value="0">
+                <input type="hidden" name="workload_id" id="workload_id_id" value="{{ object.pk }}">
+                <input type="submit" class="btn btn-success click col-sm-12" value="Start">
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <form method="POST" action="{% url 'workload:action_create' %}">
+                {% csrf_token %}
+                <input type="hidden" name="status" id="status_id" value="1">
+                <input type="hidden" name="workload_id" id="workload_id_id" value="{{ object.pk }}">
+                <input type="submit" class="btn btn-danger click col-sm-12" value="Stop">
+            </form>
+        </div>
+    </div>
+
+    </br>
+    <div class="row">  
+        <ul>
+            {% for action in object.actions.all %}
+                <li>{{ action.get_status_display }} - {{ action.time|date:'d/m/Y H:i' }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

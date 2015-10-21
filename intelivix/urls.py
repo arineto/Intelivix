@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^search/', include('haystack.urls')),
     url(r'^', include('apps.core.urls', namespace='core')),
+    url(r'^workload/', include('apps.workload.urls', namespace='workload')),
 ]
 
 if settings.DEBUG:

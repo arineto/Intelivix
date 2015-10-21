@@ -1,0 +1,22 @@
+{% extends 'workload/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <th>Usuário</th>
+                <th>Dia</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for item in object_list %}
+                    <tr>
+                        <td>{{ item.user }}</td>
+                        <td>{{ item.day|date:"d/m/Y" }}</td>
+                        <td><a href="{% url 'workload:workload_detail' item.pk %}">Detalhes</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

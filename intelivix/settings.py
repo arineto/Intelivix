@@ -52,7 +52,8 @@ OTHER_APPS = [
 ]
 
 PROJECT_APPS = [
-    'apps.core'
+    'apps.core',
+    'apps.workload'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + OTHER_APPS + PROJECT_APPS

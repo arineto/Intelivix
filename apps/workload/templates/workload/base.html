@@ -1,0 +1,59 @@
+<html lang="en" hola_ext_inject="disabled"><head>
+    <meta charset="utf-8">
+    <meta name="description" content="Intelivix Test">
+    <meta name="author" content="José Neto">
+
+    <title>Intelivix - Carga Horária</title>
+
+    {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% block head %}{% endblock %}
+  </head>
+  <body cz-shortcut-listen="true">
+
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'workload:index' %}">Intelivix - Carga Horária</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="{% url 'workload:workload_list' %}">Listagem</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    {% if messages %}
+      <div class="alert alert-success alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="container">
+      <div class="jumbotron">
+        {% block content %}{% endblock %}
+      </div> 
+    </div> <!-- /container -->
+
+    {% block script %}{% endblock %}
+  </body>
+</html>
